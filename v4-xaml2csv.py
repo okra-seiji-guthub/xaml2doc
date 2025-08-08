@@ -788,8 +788,8 @@ def write_csv_to_excel(csv_file, excel_template, output_excel):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python parse_xaml_to_csv.py <xaml filename>")
+    if len(sys.argv) != 3:
+        print("Usage: python parse_xaml_to_csv.py <xaml filename> <destination folder>")
 
         xaml_file = "./AcMonthlyDataOutput/Main.xaml"
         base_name = os.path.splitext(xaml_file)[0]
@@ -812,9 +812,9 @@ if __name__ == "__main__":
         pathArray = base_name.split("/")
         module = pathArray.pop()
         senario = pathArray.pop()
-        csv_file = f"./dest/{senario}-{module}.csv"
+        csv_file = f"{sys.argv[2]}/{senario}-{module}.csv"
         parse_xaml_to_csv(xaml_file, csv_file)
 
         template_path = "./template/template.xlsx"
-        output_excel = f"./dest/{senario}-{module}.xlsx"
+        output_excel = f"{sys.argv[2]}/{senario}-{module}.xlsx"
         write_csv_to_excel(csv_file, template_path, output_excel)
